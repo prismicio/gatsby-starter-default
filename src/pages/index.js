@@ -1,22 +1,61 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
+import { RichText } from 'prismic-reactjs'
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
+export const query = graphql`{
+  prismicHomepage {
+    data {
+      meta_title
+      meta_description
+      meta_author
+      richtext {
+        raw
+      }
+      image {
+        url
+      }
+    }
+  }
+  allPrismicPage( sort: {
+    fields: data___meta_title
+   }) {
+    edges {
+      node {
+        url
+        id
+        data {
+          meta_title
+        }
+      }
+    }
+  }
+}`
+
+const IndexPage = ({ data }) => (
   <Layout>
+     {console.log(data)}
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
+    <RichText render={data.prismicHomepage.data.richtext.raw} />
+
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
+      <img src={data.prismicHomepage.data.image.url} alt="" />
     </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
+    
+    {data.allPrismicPage.edges.map((edge, index, arr) => {
+      const Elem = (props) => (<Link {...props} to={`/${edge.node.url}`}>Go to {edge.node.data.meta_title}</Link>);
+      
+      return (index < arr.length - 1) ? (<React.Fragment key={edge.node.id}>
+        <Elem />
+        <br/>
+      </React.Fragment>) : <Elem key={edge.node.id} />;
+    })}
+
   </Layout>
 )
+
+IndexPage.query = query;
 
 export default IndexPage
