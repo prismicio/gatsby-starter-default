@@ -12,6 +12,7 @@ process.env.PRISMIC_RELEASE_ID = process.env.PRISMIC_RELEASE_ID || "XtdZ4BIAACMA
 process.env.PRISMIC_PREVIEW_PATH = process.env.PRISMIC_PREVIEW_PATH || "/previews";
 // 
 
+const buildRelease = process.env.GATSBY_CLOUD && process.env.NODE_ENV === "development";
 
 const linkResolver = require('./src/prismic/linkResolver');
 
@@ -20,6 +21,7 @@ const gastbySourcePrismicConfig = {
   options: {
     repositoryName: process.env.PRISMIC_REPO_NAME,
     linkResolver,
+    releaseID: buildRelease ? process.env.PRISMIC_RELEASE_ID : "",
     schemas: {
       // Custom types mapped to schemas
       homepage: require("./src/schemas/homepage.json"),
