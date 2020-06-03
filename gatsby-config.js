@@ -9,7 +9,7 @@ process.env.PRISMIC_RELEASE_ID = process.env.PRISMIC_RELEASE_ID || "XtdZ4BIAACMA
 
 // now to set up gatsby-cloud and then a preview
 // For redirecting from prismic to the page on gatsby-preview
-// process.env.PRISMIC_PREVIEW_PATH = process.env.PRISMIC_PREVIEW_PATH || "/previews";
+process.env.PRISMIC_PREVIEW_PATH = process.env.PRISMIC_PREVIEW_PATH || "/previews";
 // 
 
 
