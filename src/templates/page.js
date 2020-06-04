@@ -22,12 +22,15 @@ export const query = graphql`
 
 const Page = ({ data }) => (<Layout>
     <SEO title={data.prismicPage.data.meta_title} />
+    
     <RichText
         render={data.prismicPage.data.richtext.raw}
         linkResolver={linkResolver()}
         
         serializeHyperlink={(type, element, content, children, index) => (
-            <Link to={linkResolver()(element.data)}>{content}</Link>
+            <Link key={index} to={linkResolver()(element.data)}>
+                {content}
+            </Link>
         )}
     />
 
