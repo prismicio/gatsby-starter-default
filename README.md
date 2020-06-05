@@ -1,99 +1,47 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby's default starter
-</h1>
+# Gatsby default starter
 
-Kick off your project with this default boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+A starter for building websites with [Pismic](https://prismic.io) and [Gatsby](https:/gatsby.org)
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.org/docs/gatsby-starters/)._
+## Getting started
 
-## 🚀 Quick start
+### Requirements
 
-1.  **Create a Gatsby site.**
++ [Node.js](https://nodejs.org/)
 
-    Use the Gatsby CLI to create a new site, specifying the default starter.
+### Create codebase
 
-    ```shell
-    # create a new Gatsby site using the default starter
-    gatsby new my-default-starter https://github.com/gatsbyjs/gatsby-starter-default
-    ```
+Click on "Use this repository" button to [create your own repository from this template](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
 
-1.  **Start developing.**
+### Create content in Prismic
 
-    Navigate into your new site’s directory and start it up.
+1. Goto [Prismic](https://prismic.io) and create an account and repository if you do not already have one.
+2. Copy the subdomain name of the repository to the `process.env.PRISMIC_REPO_NAME` environment variable. In this example the url.
+2. Create a custom type, by copy the schemas from [src/schemas](https://github.com/prismicio/gatsby-starter-default/tree/master/src/schemas) in to the JSON editor and save.
+3. Do this for each of the custom-types in the src/schemas directory then return to the repository dashboard and navigate to content and create some content for each of the custom-types.
+4. Click __save -> publish -> publish now__.
 
-    ```shell
-    cd my-default-starter/
-    gatsby develop
-    ```
+### Preview a release
 
-1.  **Open the source code and start editing!**
+1. Select some content to edit and make a change and click __save -> publish -> publish it during a release__
+2. This will walk you though creating a new release.
+3. Once the release is created go back to the repository dashboard and click on the name of the release name in the top bar navigation.
+4. The release id can now be found in the url. in this example the release-id is `XtdZ4BIAACMANi0x`.
+![](https://github.com/prismicio/gatsby-starter-default/tree/master/docs/images/releaseID.png)
+5. Add this id to the environment variables in `gatsby-config.js` as `process.env.PRISMIC_RELEASE_ID`.
+6. Create a preview in Prismic __settings -> previews -> create a preview__ set the name to `local-release` the domain to `http://localhost:8000` and set the preview path to `/previews`.
+7. Add this preview path to `gatsby-config.js` as `process.env.PRISMIC_PREVIEW_PATH`. 
+8. To see the preview build run `GATSBY_CLOUD=true npm start`
 
-    Your site is now running at `http://localhost:8000`!
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
+## Gatsby cloud
 
-    Open the `my-default-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+1. Go to [gatsby.com](https://www.gatsbyjs.com/) and log-in with github and select __create a new site__.
+2. Select __I have a gatsby site__.
+3. Select the repository that this template has been used in.
+4. For integrations choose __skip this step__.
+5. Set the environment variables in gatsby cloud.
+6. Click __save__ and __create site__
 
-## 🧐 What's inside?
+### Webhooks
 
-A quick look at the top-level files and directories you'll see in a Gatsby project.
-
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── .prettierrc
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    └── README.md
-
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
-
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
-
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
-
-4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
-
-5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.org/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
-
-6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.org/docs/gatsby-config/) for more detail).
-
-7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.org/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
-
-8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.org/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
-
-9.  **`LICENSE`**: Gatsby is licensed under the MIT license.
-
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
-
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
-
-12. **`README.md`**: A text file containing useful reference information about your project.
-
-## 🎓 Learning Gatsby
-
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.org/). Here are some places to start:
-
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.org/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
-
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.org/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
-
-## 💫 Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gatsbyjs/gatsby-starter-default)
-
-<!-- AUTO-GENERATED-CONTENT:END -->
+Create two webhooks one for gatsby's production build and preview builds in prismic by following the [prismic user guide](https://user-guides.prismic.io/en/articles/790505-webhooks) and the urls that can be found for the project on gatsby.com underneath ___site settings -> webhooks__,
