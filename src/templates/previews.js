@@ -6,7 +6,7 @@ import { getApi } from 'prismic-javascript'
 
 const Previews = ({
     location: { search },
-    pageContext: { repositoryName, accessToken },
+    pageContext: { repositoryName, ...options },
 }) => {
 
     const params = new URLSearchParams(search);
@@ -14,9 +14,9 @@ const Previews = ({
 
     if(!documentId) return navigate('/');
 
-    
-    // this could also be retrieved from the token url.
-    getApi(repositoryName, { accessToken })
+    const apiEndpoint = `https://${repositoryName}.prismic.io/api/v2`
+
+    getApi(apiEndpoint, { ...options })
         .then((api) => api.getByID(documentId))
         .then(linkResolver())
         .then((path) => navigate(path || '/'))
