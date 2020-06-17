@@ -11,27 +11,22 @@ exports.createPages = async ({ graphql, actions }) => {
     const { createPage } = actions
 
     const {
-      NODE_ENV,
-      PRISMIC_RELEASE_ID,
       PRISMIC_PREVIEW_PATH,
       PRISMIC_API_KEY,
       PRISMIC_REPO_NAME,
-      GATSBY_CLOUD,
     } = process.env;
 
-    // discuss when to use gatsby-previews, should we allow users to use previews locally?
-    // here we will create previews only on gatsby for a release
-    if (GATSBY_CLOUD && PRISMIC_RELEASE_ID && PRISMIC_PREVIEW_PATH && NODE_ENV === 'development') {
-      
-      createPage({
-        path: PRISMIC_PREVIEW_PATH,
-        component: path.resolve(__dirname, 'src/templates/previews.js'),
-        context: {
-          repositoryName: PRISMIC_REPO_NAME,
-          apiKey: PRISMIC_API_KEY,
-        },
-      });
-    }
+
+    // this could be done conditionally
+    createPage({
+      path: PRISMIC_PREVIEW_PATH,
+      component: path.resolve(__dirname, 'src/templates/previews.js'),
+      context: {
+        repositoryName: PRISMIC_REPO_NAME,
+        accessToken: PRISMIC_API_KEY,
+      },
+    });
+    
 
     const pages = await graphql(`{
       allPrismicPage {
