@@ -36,8 +36,9 @@ export const query = graphql`{
 
 const IndexPage = ({ data }) => (
   <Layout>
-     {console.log(data)}
+
     <SEO title="Home" />
+
     <RichText render={data.prismicHomepage.data.richtext.raw} />
 
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
@@ -45,7 +46,8 @@ const IndexPage = ({ data }) => (
     </div>
     
     {data.allPrismicPage.edges.map((edge, index, arr) => {
-      const Elem = (props) => (<Link {...props} to={`/${edge.node.url}`}>Go to {edge.node.data.meta_title}</Link>);
+      
+      const Elem = (props) => (<Link {...props} to={edge.node.url}>Go to {edge.node.data.meta_title}</Link>);
       
       return (index < arr.length - 1) ? (<React.Fragment key={edge.node.id}>
         <Elem />
