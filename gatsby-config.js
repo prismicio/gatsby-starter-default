@@ -2,7 +2,6 @@
 // Can be configured in gatsby-cloud
 process.env.PRISMIC_REPO_NAME = process.env.PRISMIC_REPO_NAME || "gatsby-starter-default";
 
-process.env.PRISMIC_API_KEY = process.env.PRISMIC_API_KEY || undefined;
 
 // Release to preview 
 process.env.PRISMIC_RELEASE_ID = process.env.PRISMIC_RELEASE_ID || "XtdZ4BIAACMANi0x";
@@ -10,7 +9,8 @@ process.env.PRISMIC_RELEASE_ID = process.env.PRISMIC_RELEASE_ID || "XtdZ4BIAACMA
 // now to set up gatsby-cloud and then a preview
 // For redirecting from prismic to the page on gatsby-preview
 process.env.PRISMIC_PREVIEW_PATH = process.env.PRISMIC_PREVIEW_PATH || "/previews";
-// 
+
+const accessToken = process.env.PRISMIC_API_KEY;
 
 const buildRelease = process.env.GATSBY_CLOUD && process.env.NODE_ENV === "development";
 
@@ -20,13 +20,19 @@ const gastbySourcePrismicConfig = {
   resolve: 'gatsby-source-prismic',
   options: {
     repositoryName: process.env.PRISMIC_REPO_NAME,
+    accessToken,
     linkResolver,
-    releaseID: buildRelease ? process.env.PRISMIC_RELEASE_ID : "",
+
     schemas: {
       // Custom types mapped to schemas
       homepage: require("./src/schemas/homepage.json"),
       page: require('./src/schemas/page.json')
     },
+
+    releaseID: buildRelease ? process.env.PRISMIC_RELEASE_ID : "",
+    
+    // add prismic toolbar
+    prismicToolbar: true
   }
 };
 
