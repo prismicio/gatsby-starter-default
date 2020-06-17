@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 import { RichText } from "prismic-reactjs";
+import { withPreview } from 'gatsby-source-prismic'
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
@@ -38,4 +39,4 @@ const Page = ({ data }) => (<Layout>
 
 Page.query = query;
 
-export default Page
+export default withPreview(Page)

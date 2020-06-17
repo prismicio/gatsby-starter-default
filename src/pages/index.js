@@ -60,4 +60,4 @@ const IndexPage = ({ data }) => (
 
 IndexPage.query = query;
 
-export default IndexPage
+export default withPreview(IndexPage)

@@ -1,28 +1,17 @@
-import React from 'react';
-import { navigate  } from 'gatsby';
+import React from 'react'
+import { withPreviewResolver } from 'gatsby-source-prismic'
 
+import Layout from '../components/layout'
 import linkResolver from '../prismic/linkResolver';
-import { getApi } from 'prismic-javascript'
 
-const Previews = ({
-    location: { search },
-    pageContext: { repositoryName, ...options },
-}) => {
-
-    const params = new URLSearchParams(search);
-    const documentId = params.get('documentId');
-
-    if(!documentId) return navigate('/');
-
-    const apiEndpoint = `https://${repositoryName}.prismic.io/api/v2`
-
-    getApi(apiEndpoint, { ...options })
-        .then((api) => api.getByID(documentId))
-        .then(linkResolver())
-        .then((path) => navigate(path || '/'))
-        .catch(() => navigate('/'));
-
-    return <div>Loading preview...</div>
+const PreviewPage = ({ isPreview, isLoading }) => {
+    
+    if (isPreview === false) return 'Not a preview!'
+    
+    return(<Layout> <p>Loading</p> </Layout>);
 }
-
-export default Previews
+  
+export default (props) => {
+    const { repositoryName } = props.pageContext;  
+    return withPreviewResolver(PreviewPage, { repositoryName, linkResolver })(props)
+}
